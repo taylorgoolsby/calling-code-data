@@ -5,7 +5,7 @@ const sourceTable = fs.readFileSync("./source.html", { encoding: "utf-8" });
 
 const tdOuterHtmls = sourceTable.match(/<td.*?<\/td>/gs);
 
-const data = {};
+const data = new Map();
 
 for (const line of tdOuterHtmls) {
   const innerMatches = line.match(/>(.*?)</gs) || []; // only select stuff between tags.
@@ -52,15 +52,23 @@ for (const line of tdOuterHtmls) {
       continue
     }
 
-    if (!data[callingCode]) {
-      data[callingCode] = countryCodes;
+    if (!data.has(callingCode)) {
+      data.set(callingCode, countryCodes);
     } else {
       throw new Error(`${callingCode} was found in two different cells.`);
     }
   }
 }
 
-let dataFile = `export default ${JSON.stringify(data)}`
+
+
+// let dataFile = `export default ${JSON.stringify(data)}`
+let dataFile = 'export default {\n'
+for (const [key, value] of data) {
+  dataFile += `"${key}": ${JSON.stringify(value)},\n`
+}
+dataFile += "}\n"
+
 dataFile = await prettier.format(dataFile, {parser: 'flow'})
 
 fs.writeFileSync("./index.js", dataFile, {
