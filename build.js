@@ -60,9 +60,9 @@ for (const line of tdOuterHtmls) {
   }
 }
 
-let dataJson = JSON.stringify(data)
-dataJson = await prettier.format(dataJson, {parser: 'json'})
+let dataFile = `export default ${JSON.stringify(data)}`
+dataFile = await prettier.format(dataFile, {parser: 'flow'})
 
-fs.writeFileSync("./data.json", dataJson, {
+fs.writeFileSync("./index.js", dataFile, {
   encoding: "utf-8",
 });

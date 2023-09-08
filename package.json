@@ -8,8 +8,7 @@
     ".": "./index.js"
   },
   "files": [
-    "index.js",
-    "data.json"
+    "index.js"
   ],
   "scripts": {
     "build": "node build.js"
