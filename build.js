@@ -63,11 +63,19 @@ for (const line of tdOuterHtmls) {
 
 
 // let dataFile = `export default ${JSON.stringify(data)}`
-let dataFile = 'export default {\n'
+let dataFile = 'const callingCodeData = {\n'
 for (const [key, value] of data) {
   dataFile += `"${key}": ${JSON.stringify(value)},\n`
 }
 dataFile += "}\n"
+
+const allCallingCodes = Array.from(data.keys())
+
+dataFile += `
+export const allCallingCodes = ${JSON.stringify(allCallingCodes)}
+export const geographicCallingCodes = allCallingCodes.filter(callingCode => !callingCodeData[callingCode].includes('-') && !callingCodeData[callingCode].includes('**'))
+export default callingCodeData
+`
 
 dataFile = await prettier.format(dataFile, {parser: 'flow'})
 
