@@ -12,6 +12,9 @@ An ESM importable data set containing all calling codes and their mappings to IS
 {
   "1": ["CA", "US"],
   "1671": ["GU"],
+  "1809": ["DO"],
+  "1829": ["DO"],
+  "1849": ["DO"],
   "44": ["GB", "GG", "IM", "JE"],
   "63": ["PH"],
   "81": ["JP"],
