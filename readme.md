@@ -1,6 +1,6 @@
 # calling-code-data
 
-An ESM importable data set containing all calling codes and their mappings to ISO 3166-1 alpha-2, and name.
+An ESM importable data set containing all calling codes and their mappings to ISO 3166-1 alpha-2 country code.
 
 * Some calling codes map to multiple country codes. For example, `"1": ["CA", "US"]`.
 * Some calling codes are unassigned. For example, `"887": ["-"]`.
